@@ -7,6 +7,7 @@ const defaultConfig = {
   offset: 0,
   scrollDuration: 400,
   keepLastAnchorHash: false,
+  scrollUrlHashUpdate: true,
 }
 
 class Manager {
@@ -60,15 +61,19 @@ class Manager {
   }
 
   handleScroll = () => {
-    const {offset, keepLastAnchorHash} = this.config
-    const bestAnchorId = getBestAnchorGivenScrollLocation(this.anchors, offset)
+    const {offset, keepLastAnchorHash, scrollUrlHashUpdate} = this.config
 
-    if (bestAnchorId && getHash() !== bestAnchorId) {
-      this.forcedHash = true
-      updateHash(bestAnchorId, false)
-    } else if (!bestAnchorId && !keepLastAnchorHash) {
-      removeHash()
+    if (!!scrollUrlHashUpdate) {
+      const bestAnchorId = getBestAnchorGivenScrollLocation(this.anchors, offset)
+
+      if (bestAnchorId && getHash() !== bestAnchorId) {
+        this.forcedHash = true
+        updateHash(bestAnchorId, false)
+      } else if (!bestAnchorId && !keepLastAnchorHash) {
+        removeHash()
+      }
     }
+   
   }
 
   handleHashChange = (e) => {

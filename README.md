@@ -70,6 +70,7 @@ configureAnchors({offset: -60, scrollDuration: 200})
 | `offset`              | `0`              |
 | `scrollDuration`      | `400`            |
 | `keepLastAnchorHash`  | `false`          |
+| `scrollUrlHashUpdate` | `true`           |
 
 ### 3. Utilities
 
